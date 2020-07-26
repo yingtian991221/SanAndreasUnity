@@ -1,7 +1,10 @@
 
-# San Andreas Unity
+# San Andreas Unity VR 
 
 <br>
+
+This ia a VR form from the original Project aimed to make it work on Oculus (Quest) headsets. It kinda works. Place your GTA SA Files to /sdcard/gtasa on your quest and hit the Start in VR button and hope for the best.
+
 
 <div align="center">
     <img src="https://i.imgur.com/aIojfPW.png" width="320" height="320">
