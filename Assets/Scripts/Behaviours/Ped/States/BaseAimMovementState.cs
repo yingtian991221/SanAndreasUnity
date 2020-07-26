@@ -525,7 +525,7 @@ namespace SanAndreasUnity.Behaviours.Peds.States
             if (ped.IsControlledByLocalPlayer && ped.Camera != null)
             {
                 // find ray going into the world
-                Ray ray = ped.Camera.GetRayFromCenter();
+                Ray ray = Camera.main.GetRayFromCenter(); 
 
                 // raycast
                 RaycastHit hit;

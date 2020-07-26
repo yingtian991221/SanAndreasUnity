@@ -61,7 +61,7 @@ namespace SanAndreasUnity.Behaviours
 
 		}
 
-		public void DrawHealthBar ()
+	/*	public void DrawHealthBar ()
 		{
 			
 			Vector3 pos = this.GetPosForHealthBar ();
@@ -75,7 +75,7 @@ namespace SanAndreasUnity.Behaviours
 			float borderWidth = Mathf.Min( 2f, rect.height / 4f );
 			GUIUtils.DrawBar( rect, this.Health / this.MaxHealth, PedManager.Instance.healthColor, PedManager.Instance.healthBackgroundColor, borderWidth );
 
-		}
+		}*/
 
 		private Vector3 GetPosForHealthBar ()
 		{

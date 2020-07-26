@@ -130,11 +130,13 @@ namespace SanAndreasUnity.Importing.Conversion
             if (vehicle && alpha)
             {
                 return Shader.Find("SanAndreasUnity/VehicleTransparent");
+               // return Shader.Find("Standard");
             }
 
             if (vehicle)
             {
-                return Shader.Find("SanAndreasUnity/Vehicle");
+                   return Shader.Find("SanAndreasUnity/Vehicle");
+               // return Shader.Find("Standard");
             }
 
             if (noBackCull && alpha)

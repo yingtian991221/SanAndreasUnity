@@ -6,119 +6,119 @@ using UnityEngine.UI;
 
 namespace SanAndreasUnity.UI
 {
-	
-	public class TouchInput : MonoBehaviour
-	{
 
-		public static TouchInput Instance { get; private set; }
+    public class TouchInput : MonoBehaviour
+    {
 
-		public Canvas canvas;
-		public GameObject panel;
-		public GameObject pedMovementInputGo, vehicleInputGo;
-		Button walkButton, sprintButton, jumpButton, crouchButton, enterButton, aimButton, fireButton, flyButton, 
-			exitVehicleButton, nextWeaponButton, previousWeaponButton, nextRadioStationButton, previousRadioStationButton;
-		UIEventsPickup jumpButtonEventsPickup, fireButtonEventsPickup, handbrakePickup, backwardVehiclePickup, forwardVehiclePickup, panelPickup;
-		Text walkButtonText, sprintButtonText, aimButtonText, jumpButtonText, fireButtonText;
-		ArrowsMovementButton movementButton, turnVehicleButton;
+        public static TouchInput Instance { get; private set; }
 
-		bool m_walkPressed, m_sprintPressed, m_aimPressed, m_crouchPressed, m_enterPressed, m_flyPressed, m_exitVehiclePressed,
-			m_nextWeaponPressed, m_previousWeaponPressed;
+        public Canvas canvas;
+        public GameObject panel;
+        public GameObject pedMovementInputGo, vehicleInputGo;
+        Button walkButton, sprintButton, jumpButton, crouchButton, enterButton, aimButton, fireButton, flyButton,
+            exitVehicleButton, nextWeaponButton, previousWeaponButton, nextRadioStationButton, previousRadioStationButton;
+        UIEventsPickup jumpButtonEventsPickup, fireButtonEventsPickup, handbrakePickup, backwardVehiclePickup, forwardVehiclePickup, panelPickup;
+        Text walkButtonText, sprintButtonText, aimButtonText, jumpButtonText, fireButtonText;
+        ArrowsMovementButton movementButton, turnVehicleButton;
 
-		public Color activeButtonColor = Color.blue;
-		public Color inactiveButtonColor = Color.black;
+        bool m_walkPressed, m_sprintPressed, m_aimPressed, m_crouchPressed, m_enterPressed, m_flyPressed, m_exitVehiclePressed,
+            m_nextWeaponPressed, m_previousWeaponPressed;
 
-		public float vehicleTurnMultiplier = 1.5f;
+        public Color activeButtonColor = Color.blue;
+        public Color inactiveButtonColor = Color.black;
 
-		//List<Vector2> m_panelDeltas = new List<Vector2>();
-		Vector2 m_panelDeltasSum = Vector2.zero;
-		public float touchPointerSensitivity = 1f;
+        public float vehicleTurnMultiplier = 1.5f;
 
+        //List<Vector2> m_panelDeltas = new List<Vector2>();
+        Vector2 m_panelDeltasSum = Vector2.zero;
+        public float touchPointerSensitivity = 1f;
 
+        /*
 
-		void Awake ()
-		{
-			Instance = this;
+        void Awake()
+        {
+            Instance = this;
 
-			// setup references
+            // setup references
 
-			Transform parent = pedMovementInputGo.transform;
+            Transform parent = pedMovementInputGo.transform;
 
-			walkButton = parent.Find("WalkButton").GetComponent<Button>();
-			sprintButton = parent.Find("SprintButton").GetComponent<Button>();
-			jumpButton = parent.Find("JumpButton").GetComponent<Button>();
-			crouchButton = parent.Find("CrouchButton").GetComponent<Button>();
-			enterButton = parent.Find("EnterButton").GetComponent<Button>();
-			aimButton = parent.Find("AimButton").GetComponent<Button>();
-			fireButton = parent.Find("FireButton").GetComponent<Button>();
-			flyButton = parent.Find("FlyButton").GetComponent<Button>();
-			nextWeaponButton = parent.Find("NextWeaponButton").GetComponent<Button>();
-			previousWeaponButton = parent.Find("PreviousWeaponButton").GetComponent<Button>();
-			movementButton = parent.Find("MovementButton").GetComponent<ArrowsMovementButton>();
+            walkButton = parent.Find("WalkButton").GetComponent<Button>();
+            sprintButton = parent.Find("SprintButton").GetComponent<Button>();
+            jumpButton = parent.Find("JumpButton").GetComponent<Button>();
+            crouchButton = parent.Find("CrouchButton").GetComponent<Button>();
+            enterButton = parent.Find("EnterButton").GetComponent<Button>();
+            aimButton = parent.Find("AimButton").GetComponent<Button>();
+            fireButton = parent.Find("FireButton").GetComponent<Button>();
+            flyButton = parent.Find("FlyButton").GetComponent<Button>();
+            nextWeaponButton = parent.Find("NextWeaponButton").GetComponent<Button>();
+            previousWeaponButton = parent.Find("PreviousWeaponButton").GetComponent<Button>();
+            movementButton = parent.Find("MovementButton").GetComponent<ArrowsMovementButton>();
 
-			parent = vehicleInputGo.transform;
-			exitVehicleButton = parent.Find("ExitButton").GetComponent<Button>();
-			turnVehicleButton = parent.Find("TurnButton").GetComponent<ArrowsMovementButton>();
+            parent = vehicleInputGo.transform;
+            exitVehicleButton = parent.Find("ExitButton").GetComponent<Button>();
+            turnVehicleButton = parent.Find("TurnButton").GetComponent<ArrowsMovementButton>();
             nextRadioStationButton = parent.Find("NextRadioStationButton").GetComponent<Button>();
             previousRadioStationButton = parent.Find("PreviousRadioStationButton").GetComponent<Button>();
             // repeat buttons: handbrake, backward, forward
             handbrakePickup = parent.Find("HandbrakeButton").gameObject.GetOrAddComponent<UIEventsPickup>();
-			backwardVehiclePickup = parent.Find("BackwardButton").gameObject.GetOrAddComponent<UIEventsPickup>();
-			forwardVehiclePickup = parent.Find("ForwardButton").gameObject.GetOrAddComponent<UIEventsPickup>();
+            backwardVehiclePickup = parent.Find("BackwardButton").gameObject.GetOrAddComponent<UIEventsPickup>();
+            forwardVehiclePickup = parent.Find("ForwardButton").gameObject.GetOrAddComponent<UIEventsPickup>();
 
             // repeat buttons: jump, fire
             jumpButtonEventsPickup = jumpButton.gameObject.GetOrAddComponent<UIEventsPickup>();
-			fireButtonEventsPickup = fireButton.gameObject.GetOrAddComponent<UIEventsPickup>();
+            fireButtonEventsPickup = fireButton.gameObject.GetOrAddComponent<UIEventsPickup>();
 
-			// panel
-			panelPickup = this.panel.GetOrAddComponent<UIEventsPickup>();
+            // panel
+            panelPickup = this.panel.GetOrAddComponent<UIEventsPickup>();
 
-			// text components
-			walkButtonText = walkButton.GetComponentInChildren<Text>();
-			sprintButtonText = sprintButton.GetComponentInChildren<Text>();
-			aimButtonText = aimButton.GetComponentInChildren<Text>();
-			jumpButtonText = jumpButton.GetComponentInChildren<Text>();
-			fireButtonText = fireButton.GetComponentInChildren<Text>();
+            // text components
+            walkButtonText = walkButton.GetComponentInChildren<Text>();
+            sprintButtonText = sprintButton.GetComponentInChildren<Text>();
+            aimButtonText = aimButton.GetComponentInChildren<Text>();
+            jumpButtonText = jumpButton.GetComponentInChildren<Text>();
+            fireButtonText = fireButton.GetComponentInChildren<Text>();
 
-			// setup event handlers
-			// note: for this to work properly, EventSystem.Update() must run before our Update()
+            // setup event handlers
+            // note: for this to work properly, EventSystem.Update() must run before our Update()
 
-			// toggle buttons
-			walkButton.onClick.AddListener( () => m_walkPressed = true );
-			sprintButton.onClick.AddListener( () => m_sprintPressed = true );
-			aimButton.onClick.AddListener( () => m_aimPressed = true );
+            // toggle buttons
+            walkButton.onClick.AddListener(() => m_walkPressed = true);
+            sprintButton.onClick.AddListener(() => m_sprintPressed = true);
+            aimButton.onClick.AddListener(() => m_aimPressed = true);
 
-			// click buttons: crouch, enter, fly, exit vehicle, next weapon, previous weapon
-			crouchButton.onClick.AddListener( () => m_crouchPressed = true );
-			enterButton.onClick.AddListener( () => m_enterPressed = true );
-			flyButton.onClick.AddListener( () => m_flyPressed = true );
-			exitVehicleButton.onClick.AddListener( () => m_exitVehiclePressed = true );
-			nextWeaponButton.onClick.AddListener( () => m_nextWeaponPressed = true );
-			previousWeaponButton.onClick.AddListener( () => m_previousWeaponPressed = true );
+            // click buttons: crouch, enter, fly, exit vehicle, next weapon, previous weapon
+            crouchButton.onClick.AddListener(() => m_crouchPressed = true);
+            enterButton.onClick.AddListener(() => m_enterPressed = true);
+            flyButton.onClick.AddListener(() => m_flyPressed = true);
+            exitVehicleButton.onClick.AddListener(() => m_exitVehiclePressed = true);
+            nextWeaponButton.onClick.AddListener(() => m_nextWeaponPressed = true);
+            previousWeaponButton.onClick.AddListener(() => m_previousWeaponPressed = true);
             nextRadioStationButton.onClick.AddListener(() => m_nextWeaponPressed = true);
             previousRadioStationButton.onClick.AddListener(() => m_previousWeaponPressed = true);
 
             // panel
             panelPickup.onDrag += (eventData) => this.OnPanelDrag(eventData);
 
-		}
+        }
 
-		void OnLoaderFinished()
-		{
-			// assign textures to movement buttons' arrows
+        void OnLoaderFinished()
+        {
+            // assign textures to movement buttons' arrows
 
-			movementButton.leftArrow.texture = HUD.LeftArrowTexture;
-			movementButton.rightArrow.texture = HUD.RightArrowTexture;
-			movementButton.upArrow.texture = HUD.DownArrowTexture;
-			movementButton.downArrow.texture = HUD.UpArrowTexture;
+            movementButton.leftArrow.texture = HUD.LeftArrowTexture;
+            movementButton.rightArrow.texture = HUD.RightArrowTexture;
+            movementButton.upArrow.texture = HUD.DownArrowTexture;
+            movementButton.downArrow.texture = HUD.UpArrowTexture;
 
-			turnVehicleButton.leftArrow.texture = HUD.LeftArrowTexture;
-			turnVehicleButton.rightArrow.texture = HUD.RightArrowTexture;
+            turnVehicleButton.leftArrow.texture = HUD.LeftArrowTexture;
+            turnVehicleButton.rightArrow.texture = HUD.RightArrowTexture;
 
-		}
+        }
 
-		void Update()
-		{
-
+        void Update()
+        {
+            
 			this.ResetCustomInput();
 
 			if (!UIManager.Instance.UseTouchInput || !GameManager.CanPlayerReadInput())
@@ -174,11 +174,13 @@ namespace SanAndreasUnity.UI
 			customInput.SetAxis("Mouse Y", m_panelDeltasSum.y / Screen.height * this.touchPointerSensitivity * GameManager.Instance.cursorSensitivity.y);
 			// reset deltas sum
 			m_panelDeltasSum = Vector2.zero;
+            
+    }
 
-		}
 
-		void ResetCustomInput()
-		{
+
+    void ResetCustomInput()
+        {
 			var customInput = CustomInput.Instance;
 
 			if (!UIManager.Instance.UseTouchInput)
@@ -319,6 +321,8 @@ namespace SanAndreasUnity.UI
 			m_panelDeltasSum += eventData.delta;
 		}
 
-	}
+        }
+  */
 
+    }
 }

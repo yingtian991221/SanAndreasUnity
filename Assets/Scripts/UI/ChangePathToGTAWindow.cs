@@ -45,6 +45,7 @@ namespace SanAndreasUnity.UI {
 
 			// set current directory to game directory
 			string currentGameDir = Config.GetPath (Config.const_game_dir);
+            
 			if (!string.IsNullOrEmpty (currentGameDir))
 			{
 				m_fileBrowser.CurrentDirectory = currentGameDir;
@@ -74,6 +75,12 @@ namespace SanAndreasUnity.UI {
 			this.IsOpened = false;
 
 		}
+
+        public void SetQuestPath()
+        {
+            Config.SetString(Config.const_game_dir, "/sdcard/gtasa");
+            Config.SaveUserConfigSafe();
+        }
 
 		protected override void OnWindowGUI ()
 		{

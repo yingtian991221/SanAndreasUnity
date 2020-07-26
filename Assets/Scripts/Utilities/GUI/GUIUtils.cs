@@ -126,6 +126,7 @@ namespace SanAndreasUnity.Utilities
 			styleWithBackground.normal.background = Texture2D.whiteTexture;
 			GUI.Box (position, content ?? GUIContent.none, styleWithBackground);
 			GUI.backgroundColor = backgroundColor;
+            
 		}
 
 		public static void DrawBar (Rect rect, float fillPerc, Color fillColor, Color backgroundColor, float borderWidth)
@@ -153,7 +154,7 @@ namespace SanAndreasUnity.Utilities
 			return GUILayout.Toolbar (currentTabIndex, tabNames);
 		}
 
-		public static Rect GetRectForBarAsBillboard (Vector3 worldPos, float worldWidth, float worldHeight, Camera cam)
+		public static Rect GetRectForBarAsBillboard (Vector3 worldPos, float worldWidth, float worldHeight, GameObject cam)
 		{
 
 			Vector3 camRight = cam.transform.right;
@@ -167,8 +168,8 @@ namespace SanAndreasUnity.Utilities
 			Vector3 leftWorld = worldPos - camRight * worldWidth * 0.5f;
 			Vector3 rightWorld = worldPos + camRight * worldWidth * 0.5f;
 
-			Vector3 leftScreen = cam.WorldToScreenPoint (leftWorld);
-			Vector3 rightScreen = cam.WorldToScreenPoint (rightWorld);
+			Vector3 leftScreen = Camera.main.WorldToScreenPoint (leftWorld);
+			Vector3 rightScreen = Camera.main.WorldToScreenPoint (rightWorld);
 
 			if (leftScreen.z < 0 || rightScreen.z < 0)
 				return Rect.zero;

@@ -148,7 +148,7 @@ namespace SanAndreasUnity.UI {
 			this.pedVelocityText.enabled = PedManager.Instance.showPedSpeedometer;
 			if (this.pedVelocityText.enabled)
 			{
-				string pedVelocityDisplayText = string.Format("{0:0.0} km/h", ped.GetComponent<PlayerController>().CurVelocity);
+				string pedVelocityDisplayText = string.Format("{0:0.0} km/h", ped.GetComponent<PlayerController>());
 				if (pedVelocityDisplayText != this.pedVelocityText.text)
 					this.pedVelocityText.text = pedVelocityDisplayText;
 			}

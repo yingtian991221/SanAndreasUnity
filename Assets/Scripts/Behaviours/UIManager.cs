@@ -50,10 +50,13 @@ namespace SanAndreasUnity.Behaviours
 	        
 	        Instance = this;
 
-	        // enable touch input by default on mobile platforms
-	    	if (Application.isMobilePlatform)
+            // enable touch input by default on mobile platforms
+
+          //   Not needed on Oculus Quest
+
+            if (Application.isMobilePlatform)
 	    	{
-	    		this.UseTouchInput = true;
+	    		this.UseTouchInput = false;
 	    	}
 
 	    	// set default font size on mobile platforms
@@ -63,7 +66,7 @@ namespace SanAndreasUnity.Behaviours
 	    		if (fontSize > m_maxFontSize)
 	    			fontSize = m_maxFontSize;
 	    		this.ImguiFontSize = fontSize;
-	    	}
+	    	}  
 
 	    }
 

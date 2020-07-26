@@ -12,7 +12,7 @@ namespace SanAndreasUnity.Behaviours {
 
 		private	Ped	m_ped;
 		public	PedModel	PlayerModel { get { return m_ped.PlayerModel; } }
-		public	Camera	Camera { get { return m_ped.Camera; } }
+		public	GameObject	Camera { get { return m_ped.Camera; } }
 
 		private	Weapon[]	weapons = new Weapon[(int)WeaponSlot.Count];
 		public	Weapon[]	AllWeapons { get { return this.weapons.Where (w => w != null).ToArray (); } }

@@ -23,14 +23,15 @@ namespace SanAndreasUnity.UI
 
 			this.windowName = "Start Game";
 			this.useScrollView = true;
-
+            
 		}
 
 		void Start ()
         {
 			// adjust rect
 			this.windowRect = GUIUtils.GetCenteredRect(new Vector2(550, 320));
-		}
+            Debug.Log("Start Game activated");
+        }
 
 		void Update()
 		{
@@ -65,12 +66,13 @@ namespace SanAndreasUnity.UI
 				StartGame();
 		}
 
-		void StartGame()
+		public void StartGame()
 		{
-			try
+            
+            try
 			{
 				ushort port = ushort.Parse(m_portStr);
-				string scene = m_availableScenes[m_selectedSceneIndex];
+				string scene = "Main";
 				ushort maxNumPlayers = ushort.Parse(m_maxNumPlayersStr);
 
 				NetManager.StartServer(port, scene, maxNumPlayers, m_dedicatedServer, m_dontListen);
@@ -82,7 +84,25 @@ namespace SanAndreasUnity.UI
 				MessageBox.Show("Error", ex.ToString());
 			}
 		}
+        public void StartGameVR()
+        {
+            Config.SetString(Config.const_game_dir, "/sdcard/gtasa");
+            Config.SaveUserConfigSafe();
+            try
+            {
+                ushort port = ushort.Parse(m_portStr);
+                string scene = "Main";
+                ushort maxNumPlayers = ushort.Parse(m_maxNumPlayersStr);
 
-	}
+                NetManager.StartServer(port, scene, maxNumPlayers, m_dedicatedServer, m_dontListen);
+
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogException(ex);
+                MessageBox.Show("Error", ex.ToString());
+            }
+        }
+    }
 
 }

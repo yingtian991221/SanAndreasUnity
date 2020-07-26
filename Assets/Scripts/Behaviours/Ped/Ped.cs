@@ -31,7 +31,7 @@ namespace SanAndreasUnity.Behaviours
 
 		private StateMachine m_stateMachine = new StateMachine ();
 
-        public Camera Camera { get { return this == Ped.Instance ? Camera.main : null; } }
+        public GameObject Camera { get { return this == Ped.Instance ? GameObject.FindGameObjectWithTag("CameraDummy") : null; } }
         public PedModel PlayerModel { get; private set; }
 
 		public bool shouldPlayAnims = true;

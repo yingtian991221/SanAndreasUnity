@@ -49,8 +49,8 @@ namespace SanAndreasUnity.Utilities
 		{
 			get
 			{
-				return GetPath (const_game_dir);
-			}
+				return GetPath (const_game_dir);                
+            }
 		}
 
         public static string DataPath

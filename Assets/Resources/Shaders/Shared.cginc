@@ -58,17 +58,17 @@ void surf(Input IN, inout SurfaceOutputStandard o)
         _TailLightColor
     };
 
-    fixed carEmission[9] = {
-        0,
-        0,
-        0,
-        0,
-        0,
-        exp(_Lights.x * 2) - 1,
-        exp(_Lights.y * 2) - 1,
-        exp(_Lights.z * 2) - 1,
-        exp(_Lights.w * 2) - 1
-    };
+    //fixed carEmission[9] = {
+     //   0,
+    //    0,
+    //    0,
+    //    0,
+    //    0,
+   //     exp(_Lights.x * 2) - 1,
+   //     exp(_Lights.y * 2) - 1,
+   //     exp(_Lights.z * 2) - 1,
+   //     exp(_Lights.w * 2) - 1
+  //  };
 #endif
 
     o.Albedo = clr
@@ -80,9 +80,9 @@ void surf(Input IN, inout SurfaceOutputStandard o)
     o.Alpha = fade * mask * IN.color.a * _Color.a;
     
 #ifdef VEHICLE
-    o.Metallic = _Metallic * o.Alpha;
-    o.Smoothness = _Smoothness;
-    o.Emission = carEmission[_CarColorIndex] * o.Albedo;
+	//o.Metallic = _Metallic * o.Alpha;
+    //o.Smoothness = _Smoothness;
+   // o.Emission = carEmission[_CarColorIndex] * o.Albedo;
 #else
     o.Metallic = 0;
     o.Smoothness = 0;

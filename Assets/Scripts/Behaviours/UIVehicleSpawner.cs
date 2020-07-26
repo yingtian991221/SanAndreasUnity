@@ -7,7 +7,7 @@ namespace SanAndreasUnity.Behaviours
     public class UIVehicleSpawner : MonoBehaviour
     {
         public KeyCode spawnKey = KeyCode.V;
-
+        public OVRInput.Button spawnbutton;
 
         private void Update()
         {
@@ -18,6 +18,17 @@ namespace SanAndreasUnity.Behaviours
                 else if (Net.PlayerRequests.Local != null)
                     Net.PlayerRequests.Local.RequestVehicleSpawn(-1);
             }
+
+            if (OVRInput.GetDown(spawnbutton) && GameManager.CanPlayerReadInput())
+            {
+                if (Utilities.NetUtils.IsServer)
+                    SpawnVehicle();
+                else if (Net.PlayerRequests.Local != null)
+                    Net.PlayerRequests.Local.RequestVehicleSpawn(-1);
+            }
+
+
+
         }
 
         private void SpawnVehicle()

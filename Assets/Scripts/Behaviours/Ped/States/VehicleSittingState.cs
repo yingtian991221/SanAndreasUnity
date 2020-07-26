@@ -175,7 +175,7 @@ namespace SanAndreasUnity.Behaviours.Peds.States
 		}
 
 
-		public override void UpdateCameraZoom()
+		public override void UpdateCameraZoom()  // Quest temporary  disabled
 		{
 			m_ped.CameraDistanceVehicle = Mathf.Clamp(m_ped.CameraDistanceVehicle - m_ped.MouseScrollInput.y, PedManager.Instance.minCameraDistanceFromPed,
 				PedManager.Instance.maxCameraDistanceFromPed);

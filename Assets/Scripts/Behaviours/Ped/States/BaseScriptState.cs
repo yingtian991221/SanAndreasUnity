@@ -139,7 +139,7 @@ namespace SanAndreasUnity.Behaviours.Peds.States
 
 		public static void RotateCamera(Ped ped, Vector2 mouseDelta, float xAxisClampValue)
 		{
-			Camera cam = ped.Camera;
+			GameObject cam = ped.Camera;
 
 			if (mouseDelta.sqrMagnitude < float.Epsilon)
 				return;
@@ -171,7 +171,7 @@ namespace SanAndreasUnity.Behaviours.Peds.States
 			return m_ped.CameraDistance;
 		}
 
-		public virtual void UpdateCameraZoom()
+		public virtual void UpdateCameraZoom() //Quest temporary disabled
 		{
 			m_ped.CameraDistance = Mathf.Clamp(m_ped.CameraDistance - m_ped.MouseScrollInput.y, PedManager.Instance.minCameraDistanceFromPed, 
 				PedManager.Instance.maxCameraDistanceFromPed);
@@ -189,7 +189,7 @@ namespace SanAndreasUnity.Behaviours.Peds.States
 			// cast a ray from ped to camera to see if it hits anything
 			// if so, then move the camera to hit point
 
-			Camera cam = ped.Camera;
+			GameObject cam = ped.Camera;
 
 			float distance = cameraDistance;
 			var castRay = new Ray(castFrom, castDir);

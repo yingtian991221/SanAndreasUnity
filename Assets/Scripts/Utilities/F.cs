@@ -817,7 +817,9 @@ namespace SanAndreasUnity.Utilities
 
         public static Camera FindMainCameraEvenIfDisabled()
         {
-            GameObject camObj = GameObject.FindGameObjectWithTag("MainCamera");
+            GameObject camObj = GameObject.FindGameObjectWithTag("CameraDummy");
+            Debug.Log("Camera is: " + camObj.name);
+            
             if (camObj != null)
                 return camObj.GetComponentInChildren<Camera>(true);
             return null;
