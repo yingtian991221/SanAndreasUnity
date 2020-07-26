@@ -3,7 +3,7 @@
 
 <br>
 
-This ia a VR form from the original Project aimed to make it work on Oculus (Quest) headsets. It kinda works. Place your GTA SA Files to /sdcard/gtasa on your quest and hit the Start in VR button and hope for the best.
+This ia a VR frok from the original Project aimed to make it work on Oculus (Quest) headsets. It kinda works. Place your GTA SA Files to /sdcard/gtasa on your quest and hit the Start in VR button and hope for the best.
 
 
 <div align="center">
